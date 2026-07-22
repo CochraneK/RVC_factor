@@ -280,3 +280,8 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
   document.body.insertBefore(banner, document.body.firstChild);
 });
+
+// ---------- Re-init view since app.js already tried before mock adapter loaded ----------
+if (typeof switchView === "function") {
+  switchView("people");
+}
