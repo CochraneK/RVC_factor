@@ -92,14 +92,15 @@ function localizeReason(text) {
     .replace(/\bformant F2 differs by ([\d.]+) Hz \(strong difference\)/g, "F2 共振峰相差约 $1 Hz，差异明显");
 }
 
-function avatarHTML(person, variant = "") {
+// Use window.avatarHTML if already defined (e.g. mock-adapter.js), otherwise define it
+const avatarHTML = window.avatarHTML || (function avatarHTML(person, variant = "") {
   const cls = "avatar" + (variant ? " " + variant : "") + (person && person.sex ? ` sex-${person.sex}` : "");
   if (person.avatar_path) {
     return `<div class="${cls}"><img src="/uploads/avatars/${encodeURIComponent(person.avatar_path)}" alt=""></div>`;
   }
   const initial = (person.name || "?").trim().charAt(0).toUpperCase();
   return `<div class="${cls}">${initial}</div>`;
-}
+});
 
 function escapeHTML(s) {
   return String(s ?? "").replace(/[&<>"']/g, c => ({

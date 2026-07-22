@@ -41,9 +41,9 @@ const MOCK_ALL_AUDIOS = [
 ];
 
 const MOCK_REPORTS = [
-  {"id":8,"a_audio_id":28,"b_audio_id":28,"counselor_id":16,"client_id":null,"audio_role":"original","report_type":"single","title":"王老师 单人声音报告","html_filename":"single_report_王老师_28.html","created_at":"2026-07-22T09:04:05","url":"./reports/single_report_王老师_28.html"},
-  {"id":7,"a_audio_id":30,"b_audio_id":30,"counselor_id":null,"client_id":13,"audio_role":"original","report_type":"single","title":"LUJI 单人声音报告","html_filename":"single_report_LUJI_30.html","created_at":"2026-07-22T09:01:10","url":"./reports/single_report_LUJI_30.html"},
-  {"id":6,"a_audio_id":28,"b_audio_id":30,"counselor_id":16,"client_id":13,"audio_role":"original","report_type":"pair","title":"王老师 vs LUJI（原音）","html_filename":"report_王老师_LUJI_20260722_162735.html","created_at":"2026-07-22T08:27:41","url":"./reports/report_王老师_LUJI_20260722_162735.html"}
+  {"id":8,"a_audio_id":28,"b_audio_id":28,"counselor_id":16,"client_id":null,"audio_role":"original","report_type":"single","title":"王老师 单人声音报告","html_filename":"single_report_王老师_28.html","created_at":"2026-07-22T09:04:05","url":"reports/single_report_王老师_28.html"},
+  {"id":7,"a_audio_id":30,"b_audio_id":30,"counselor_id":null,"client_id":13,"audio_role":"original","report_type":"single","title":"LUJI 单人声音报告","html_filename":"single_report_LUJI_30.html","created_at":"2026-07-22T09:01:10","url":"reports/single_report_LUJI_30.html"},
+  {"id":6,"a_audio_id":28,"b_audio_id":30,"counselor_id":16,"client_id":13,"audio_role":"original","report_type":"pair","title":"王老师 vs LUJI（原音）","html_filename":"report_王老师_LUJI_20260722_162735.html","created_at":"2026-07-22T08:27:41","url":"reports/report_王老师_LUJI_20260722_162735.html"}
 ];
 
 // ---------- Mock API ----------
