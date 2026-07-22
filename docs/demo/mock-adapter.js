@@ -272,6 +272,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ---------- app.js will call switchView("people") on load, api() is already mocked ----------
-if (typeof switchView === "function") {
-  switchView("people");
-}
+// app.js loads AFTER this file, so its switchView() will use the mocked api()
