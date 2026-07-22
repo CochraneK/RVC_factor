@@ -1,67 +1,55 @@
 /* ==================== Mock Adapter for GitHub Pages Static Demo ==================== */
 "use strict";
 
-// ---------- Mock Data ----------
+// ---------- Mock Data (from real SQLite DB) ----------
 const MOCK_COUNSELORS = [
-  { id: 1, type: "counselor", name: "王医生", sex: "female", avatar_path: null, note: "主治医师，从事心理咨询10年", created_at: "2026-07-20T08:30:00", client_count: 2, audio_count: 3 },
-  { id: 2, type: "counselor", name: "李医生", sex: "male", avatar_path: null, note: "副主任医师，专注认知行为疗法", created_at: "2026-07-18T14:00:00", client_count: 1, audio_count: 2 },
+  {"id":16,"name":"王老师","avatar_path":"counselor_c7e35ba86a4e417799aae23dc39c0c18.jpg","note":"协助测试","created_at":"2026-07-22T06:05:18.300773","sex":"male","client_count":3,"audio_count":1,"type":"counselor"},
+  {"id":13,"name":"付老师","avatar_path":null,"note":"CBT治疗干预技术","created_at":"2026-07-22T01:48:43.137802","sex":"female","client_count":3,"audio_count":0,"type":"counselor"},
+  {"id":4,"name":"贾老师","avatar_path":null,"note":"戏剧疗法","created_at":"2026-07-21T02:50:58.568095","sex":"female","client_count":1,"audio_count":0,"type":"counselor"}
 ];
 
 const MOCK_CLIENTS = {
-  1: [
-    { id: 101, type: "client", name: "张三", sex: "male", avatar_path: null, note: "焦虑障碍，定期复诊", created_at: "2026-07-19T09:00:00", counselor_id: 1, audio_count: 2 },
-    { id: 102, type: "client", name: "李四", sex: "female", avatar_path: null, note: "抑郁症初诊", created_at: "2026-07-20T10:00:00", counselor_id: 1, audio_count: 1 },
+  13: [
+    {"id":19,"counselor_id":13,"name":"JXJU","avatar_path":null,"note":"","created_at":"2026-07-22T08:15:40.019917","sex":"female","audio_count":0,"type":"client"},
+    {"id":17,"counselor_id":13,"name":"WCXI","avatar_path":null,"note":"","created_at":"2026-07-22T08:15:10.469758","sex":"female","audio_count":0,"type":"client"},
+    {"id":16,"counselor_id":13,"name":"LIHA","avatar_path":null,"note":"","created_at":"2026-07-22T08:15:03.446910","sex":"male","audio_count":0,"type":"client"}
   ],
-  2: [
-    { id: 201, type: "client", name: "赵五", sex: "male", avatar_path: null, note: "社交恐惧", created_at: "2026-07-18T15:00:00", counselor_id: 2, audio_count: 1 },
+  16: [
+    {"id":15,"counselor_id":16,"name":"CHXI","avatar_path":null,"note":"","created_at":"2026-07-22T08:14:52.914855","sex":"female","audio_count":0,"type":"client"},
+    {"id":14,"counselor_id":16,"name":"ZHYA","avatar_path":null,"note":"","created_at":"2026-07-22T08:14:25.116453","sex":"female","audio_count":0,"type":"client"},
+    {"id":13,"counselor_id":16,"name":"LUJI","avatar_path":null,"note":"","created_at":"2026-07-22T08:14:15.504649","sex":"male","audio_count":2,"type":"client"}
   ],
+  4: [
+    {"id":8,"counselor_id":4,"name":"WYYA","avatar_path":null,"note":"妄想幻听","created_at":"2026-07-21T10:40:49.681107","sex":"female","audio_count":0,"type":"client"}
+  ]
 };
 
 const MOCK_AUDIOS = {
-  "counselor-1": [
-    { id: 1001, person_type: "counselor", person_id: 1, stored_filename: "c1_sample1.wav", original_name: "咨询录音_20260720", pitch_hz: 185.5, gender: 0.62, duration: 45.2, rms: 0.078, zcr: 0.045, centroid: 1850.3, transcript: "今天感觉怎么样？", audio_role: "original", target_client_id: null, target_client_name: "", uploaded_at: "2026-07-20T08:35:00" },
-    { id: 1002, person_type: "counselor", person_id: 1, stored_filename: "c1_sample2.wav", original_name: "变音_张三", pitch_hz: 192.1, gender: 0.58, duration: 32.8, rms: 0.065, zcr: 0.052, centroid: 1780.5, transcript: "", audio_role: "converted", target_client_id: 101, target_client_name: "张三", uploaded_at: "2026-07-20T09:10:00" },
-    { id: 1003, person_type: "counselor", person_id: 1, stored_filename: "c1_sample3.wav", original_name: "咨询录音_20260721", pitch_hz: 180.3, gender: 0.65, duration: 60.0, rms: 0.082, zcr: 0.041, centroid: 1920.1, transcript: "我们继续上次的讨论", audio_role: "original", target_client_id: null, target_client_name: "", uploaded_at: "2026-07-21T08:30:00" },
+  "client-13": [
+    {"id":30,"person_type":"client","person_id":13,"stored_filename":"client_13_LUJI_M_Raw_01_4f73a4e3.wav","original_name":"LUJI_M_Raw_01","pitch_hz":100.75,"gender":0.0,"duration":2.13,"rms":0.0087,"zcr":0.0102,"centroid":2057.9,"uploaded_at":"2026-07-22T08:27:00","transcript":"","audio_role":"original","target_client_id":null,"target_client_name":""},
+    {"id":29,"person_type":"client","person_id":13,"stored_filename":"client_13_LUJI_M_Raw_01_3ba05563.wav","original_name":"LUJI_M_Raw_01","pitch_hz":121.79,"gender":0.02,"duration":6.31,"rms":0.0644,"zcr":0.0324,"centroid":2460.7,"uploaded_at":"2026-07-22T08:26:58","transcript":"","audio_role":"original","target_client_id":null,"target_client_name":""}
   ],
-  "counselor-2": [
-    { id: 2001, person_type: "counselor", person_id: 2, stored_filename: "c2_sample1.wav", original_name: "初诊录音", pitch_hz: 125.4, gender: 0.85, duration: 28.5, rms: 0.072, zcr: 0.038, centroid: 1650.2, transcript: "请描述一下你的症状", audio_role: "original", target_client_id: null, target_client_name: "", uploaded_at: "2026-07-18T14:10:00" },
-    { id: 2002, person_type: "counselor", person_id: 2, stored_filename: "c2_sample2.wav", original_name: "变音_赵五", pitch_hz: 130.2, gender: 0.80, duration: 35.0, rms: 0.068, zcr: 0.042, centroid: 1700.5, transcript: "", audio_role: "converted", target_client_id: 201, target_client_name: "赵五", uploaded_at: "2026-07-18T15:20:00" },
-  ],
-  "client-101": [
-    { id: 1101, person_type: "client", person_id: 101, stored_filename: "cl101_s1.wav", original_name: "张三_自述", pitch_hz: 155.2, gender: 0.45, duration: 120.5, rms: 0.055, zcr: 0.065, centroid: 2100.3, transcript: "我最近总是感到紧张", audio_role: "original", target_client_id: null, target_client_name: "", uploaded_at: "2026-07-19T09:15:00" },
-    { id: 1102, person_type: "client", person_id: 101, stored_filename: "cl101_s2.wav", original_name: "张三_录音2", pitch_hz: 148.6, gender: 0.48, duration: 88.3, rms: 0.058, zcr: 0.062, centroid: 2050.1, transcript: "睡眠也不好", audio_role: "original", target_client_id: null, target_client_name: "", uploaded_at: "2026-07-20T10:05:00" },
-  ],
-  "client-102": [
-    { id: 1201, person_type: "client", person_id: 102, stored_filename: "cl102_s1.wav", original_name: "李四_初诊", pitch_hz: 220.5, gender: 0.25, duration: 95.0, rms: 0.048, zcr: 0.072, centroid: 2400.8, transcript: "没什么动力做事情", audio_role: "original", target_client_id: null, target_client_name: "", uploaded_at: "2026-07-20T10:15:00" },
-  ],
-  "client-201": [
-    { id: 2101, person_type: "client", person_id: 201, stored_filename: "cl201_s1.wav", original_name: "赵五_自述", pitch_hz: 135.8, gender: 0.72, duration: 150.2, rms: 0.062, zcr: 0.055, centroid: 1750.4, transcript: "我害怕在人群中说话", audio_role: "original", target_client_id: null, target_client_name: "", uploaded_at: "2026-07-18T15:30:00" },
-  ],
+  "counselor-16": [
+    {"id":28,"person_type":"counselor","person_id":16,"stored_filename":"counselor_16_KLSH_M_Raw_01_3ea65d2b.wav","original_name":"KLSH_M_Raw_01","pitch_hz":140.47,"gender":0.23,"duration":6.74,"rms":0.0418,"zcr":0.0312,"centroid":2434.6,"uploaded_at":"2026-07-22T08:05:20","transcript":"","audio_role":"original","target_client_id":null,"target_client_name":""}
+  ]
 };
 
 const MOCK_ALL_AUDIOS = [
-  ...MOCK_AUDIOS["counselor-1"].map(a => ({ ...a, person_name: "王医生", person_sex: "female", counselor_id: null })),
-  ...MOCK_AUDIOS["counselor-2"].map(a => ({ ...a, person_name: "李医生", person_sex: "male", counselor_id: null })),
-  ...MOCK_AUDIOS["client-101"].map(a => ({ ...a, person_name: "张三", person_sex: "male", counselor_id: 1 })),
-  ...MOCK_AUDIOS["client-102"].map(a => ({ ...a, person_name: "李四", person_sex: "female", counselor_id: 1 })),
-  ...MOCK_AUDIOS["client-201"].map(a => ({ ...a, person_name: "赵五", person_sex: "male", counselor_id: 2 })),
+  {"id":30,"person_type":"client","person_id":13,"stored_filename":"client_13_LUJI_M_Raw_01_4f73a4e3.wav","original_name":"LUJI_M_Raw_01","pitch_hz":100.75,"gender":0.0,"duration":2.13,"rms":0.0087,"zcr":0.0102,"centroid":2057.9,"uploaded_at":"2026-07-22T08:27:00","transcript":"","audio_role":"original","target_client_id":null,"target_client_name":"","person_name":"LUJI","person_sex":"male","counselor_id":16},
+  {"id":29,"person_type":"client","person_id":13,"stored_filename":"client_13_LUJI_M_Raw_01_3ba05563.wav","original_name":"LUJI_M_Raw_01","pitch_hz":121.79,"gender":0.02,"duration":6.31,"rms":0.0644,"zcr":0.0324,"centroid":2460.7,"uploaded_at":"2026-07-22T08:26:58","transcript":"","audio_role":"original","target_client_id":null,"target_client_name":"","person_name":"LUJI","person_sex":"male","counselor_id":16},
+  {"id":28,"person_type":"counselor","person_id":16,"stored_filename":"counselor_16_KLSH_M_Raw_01_3ea65d2b.wav","original_name":"KLSH_M_Raw_01","pitch_hz":140.47,"gender":0.23,"duration":6.74,"rms":0.0418,"zcr":0.0312,"centroid":2434.6,"uploaded_at":"2026-07-22T08:05:20","transcript":"","audio_role":"original","target_client_id":null,"target_client_name":"","person_name":"王老师","person_sex":"male","counselor_id":null}
 ];
 
 const MOCK_REPORTS = [
-  { id: 8, a_audio_id: 28, b_audio_id: 28, counselor_id: 16, client_id: null, audio_role: "original", report_type: "single", title: "王老师 单人声音报告", html_filename: "single_report_王老师_28.html", created_at: "2026-07-22T09:04:05" },
-  { id: 7, a_audio_id: 30, b_audio_id: 30, counselor_id: null, client_id: 13, audio_role: "original", report_type: "single", title: "LUJI 单人声音报告", html_filename: "single_report_LUJI_30.html", created_at: "2026-07-22T09:01:10" },
-  { id: 6, a_audio_id: 28, b_audio_id: 30, counselor_id: 16, client_id: 13, audio_role: "original", report_type: "pair", title: "王老师 vs LUJI（原音）", html_filename: "report_王老师_LUJI_20260722_162735.html", created_at: "2026-07-22T08:27:41" },
+  {"id":8,"a_audio_id":28,"b_audio_id":28,"counselor_id":16,"client_id":null,"audio_role":"original","report_type":"single","title":"王老师 单人声音报告","html_filename":"single_report_王老师_28.html","created_at":"2026-07-22T09:04:05","url":"./reports/single_report_王老师_28.html"},
+  {"id":7,"a_audio_id":30,"b_audio_id":30,"counselor_id":null,"client_id":13,"audio_role":"original","report_type":"single","title":"LUJI 单人声音报告","html_filename":"single_report_LUJI_30.html","created_at":"2026-07-22T09:01:10","url":"./reports/single_report_LUJI_30.html"},
+  {"id":6,"a_audio_id":28,"b_audio_id":30,"counselor_id":16,"client_id":13,"audio_role":"original","report_type":"pair","title":"王老师 vs LUJI（原音）","html_filename":"report_王老师_LUJI_20260722_162735.html","created_at":"2026-07-22T08:27:41","url":"./reports/report_王老师_LUJI_20260722_162735.html"}
 ];
 
 // ---------- Mock API ----------
-const _originalApi = window.api;
-const _originalAvatarHTML = window.avatarHTML;
-
 window.api = async function api(path, opts = {}) {
-  // Simulate network delay
   await new Promise(r => setTimeout(r, 80));
 
-  // Parse path
   const mCounselors = path.match(/^\/api\/counselors\/?$/);
   const mCounselor = path.match(/^\/api\/counselors\/(\d+)$/);
   const mClients = path.match(/^\/api\/counselors\/(\d+)\/clients$/);
@@ -189,7 +177,7 @@ window.api = async function api(path, opts = {}) {
   if (mReports && (!opts.method || opts.method === "GET")) {
     const urlParams = new URLSearchParams(path.split("?")[1] || "");
     const reportType = urlParams.get("report_type");
-    let reports = MOCK_REPORTS.map(r => ({ ...r, url: `./reports/${r.html_filename}` }));
+    let reports = MOCK_REPORTS.map(r => ({ ...r }));
     if (reportType) {
       reports = reports.filter(r => r.report_type === reportType);
     }
@@ -208,14 +196,13 @@ window.api = async function api(path, opts = {}) {
     const aid = parseInt(mReportHtmlSingle[1]);
     const report = MOCK_REPORTS.find(r => r.report_type === "single" && r.a_audio_id === aid);
     if (report) {
-      return { url: `./reports/${report.html_filename}` };
+      return { url: report.url };
     }
     throw new Error("未找到报告");
   }
 
   // POST /api/compare
   if (mCompare && opts.method === "POST") {
-    // Return a mock comparison result based on real data
     return {
       verdict: "Uncertain",
       confidence: "Low",
@@ -231,14 +218,14 @@ window.api = async function api(path, opts = {}) {
     };
   }
 
-  // GET /api/report/:a/:b (for viewing pair report HTML)
+  // GET /api/report/:a/:b
   const mReportPair = path.match(/^\/api\/report\/(\d+)\/(\d+)$/);
   if (mReportPair && (!opts.method || opts.method === "GET")) {
     const aId = parseInt(mReportPair[1]);
     const bId = parseInt(mReportPair[2]);
     const report = MOCK_REPORTS.find(r => r.report_type === "pair" && r.a_audio_id === aId && r.b_audio_id === bId);
     if (report) {
-      return { url: `./reports/${report.html_filename}` };
+      return { url: report.url };
     }
     throw new Error("未找到报告");
   }
@@ -250,12 +237,12 @@ window.api = async function api(path, opts = {}) {
     const bId = parseInt(mReportHtmlPair[2]);
     const report = MOCK_REPORTS.find(r => r.report_type === "pair" && r.a_audio_id === aId && r.b_audio_id === bId);
     if (report) {
-      return { url: `./reports/${report.html_filename}` };
+      return { url: report.url };
     }
     throw new Error("未找到报告");
   }
 
-  // Fallback: try to return sensible defaults for unhandled GETs
+  // Fallback
   if (!opts.method || opts.method === "GET") {
     return [];
   }
@@ -263,9 +250,12 @@ window.api = async function api(path, opts = {}) {
   throw new Error(`演示模式：未模拟的 API 端点 ${path}`);
 };
 
-// ---------- Override avatarHTML to avoid external image paths ----------
+// ---------- Override avatarHTML to use local avatar path ----------
 window.avatarHTML = function avatarHTML(person, variant = "") {
   const cls = "avatar" + (variant ? " " + variant : "") + (person && person.sex ? ` sex-${person.sex}` : "");
+  if (person.avatar_path) {
+    return `<div class="${cls}"><img src="avatars/${encodeURIComponent(person.avatar_path)}" alt=""></div>`;
+  }
   const initial = (person.name || "?").trim().charAt(0).toUpperCase();
   return `<div class="${cls}">${initial}</div>`;
 };
