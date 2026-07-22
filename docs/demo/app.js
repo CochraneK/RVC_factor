@@ -29,7 +29,8 @@ const ICONS = {
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-async function api(path, opts = {}) {
+// Use window.api if already defined (e.g. mock-adapter.js), otherwise define it
+const api = window.api || (async function api(path, opts = {}) {
   const res = await fetch(path, opts);
   const ct = res.headers.get("content-type") || "";
   const body = ct.includes("application/json") ? await res.json() : await res.text();
@@ -38,7 +39,7 @@ async function api(path, opts = {}) {
     throw new Error(msg);
   }
   return body;
-}
+});
 
 function toast(msg, kind = "") {
   const el = $("#toast");
