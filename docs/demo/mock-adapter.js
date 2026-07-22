@@ -173,8 +173,9 @@ window.api = async function api(path, opts = {}) {
     return { name: "sample_name" };
   }
 
-  // GET /api/reports
-  if (mReports && (!opts.method || opts.method === "GET")) {
+  // GET /api/reports (with or without query string)
+  const mReportsWithQuery = path.match(/^\/api\/reports(\?.*)?$/);
+  if (mReportsWithQuery && (!opts.method || opts.method === "GET")) {
     const urlParams = new URLSearchParams(path.split("?")[1] || "");
     const reportType = urlParams.get("report_type");
     let reports = MOCK_REPORTS.map(r => ({ ...r }));

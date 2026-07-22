@@ -334,7 +334,7 @@ function clientRowHTML(cl) {
 function avatarFieldHTML(existing, isEdit) {
   const currentAvatar = existing && existing.avatar_path
     ? `<div style="text-align:center;margin-bottom:4px;">
-         <img src="/uploads/avatars/${encodeURIComponent(existing.avatar_path)}" style="width:64px;height:64px;border-radius:50%;border:2.5px solid var(--pink-soft);object-fit:cover;">
+         <img src="avatars/${encodeURIComponent(existing.avatar_path)}" style="width:64px;height:64px;border-radius:50%;border:2.5px solid var(--pink-soft);object-fit:cover;">
          <div class="muted" style="font-size:11px;margin-top:4px;">当前头像</div>
        </div>`
     : "";
