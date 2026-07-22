@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RVC Voice Studio · 演示模式</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .demo-banner {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 9999;
+    background: linear-gradient(90deg, #FF8FB1, #FFB6C1);
+    color: white;
+    font-size: 13px;
+    padding: 6px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(255,143,177,0.3);
+  }
+  .demo-banner-link {
+    color: white;
+    text-decoration: underline;
+    font-weight: 500;
+  }
+  .demo-banner-link:hover { opacity: 0.9; }
+  /* Push content down to make room for banner */
+  #app { padding-top: 28px; }
+</style>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF8FB1'%3E%3Cpath d='M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3zM5 11a1 1 0 0 1 2 0 5 5 0 0 0 10 0 1 1 0 1 1 2 0 7 7 0 0 1-6 6.92V21a1 1 0 1 1-2 0v-3.08A7 7 0 0 1 5 11z'/%3E%3C/svg%3E">
+</head>
+<body>
+<div id="app">
+  <!-- ==================== Sidebar ==================== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+          <path d="M5 11a1 1 0 0 1 2 0 5 5 0 0 0 10 0 1 1 0 1 1 2 0 7 7 0 0 1-6 6.92V21a1 1 0 1 1-2 0v-3.08A7 7 0 0 1 5 11z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">Voice Studio</div>
+        <div class="brand-sub">声音资产管理</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-item active" data-view="people">
+        <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        人员管理
+      </button>
+      <button class="nav-item" data-view="audio">
+        <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13"/>
+          <circle cx="6" cy="18" r="3"/>
+          <circle cx="18" cy="16" r="3"/>
+        </svg>
+        音频管理
+      </button>
+      <button class="nav-item" data-view="compare">
+        <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 3v18"/>
+          <path d="M15 3v18"/>
+          <path d="M3 9h6"/>
+          <path d="M15 15h6"/>
+          <circle cx="6" cy="9" r="1"/>
+          <circle cx="18" cy="15" r="1"/>
+        </svg>
+        比较分析
+      </button>
+      <button class="nav-item" data-view="reports">
+        <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <path d="M14 2v6h6"/>
+          <path d="M8 13h8M8 17h6"/>
+        </svg>
+        报告管理
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <div id="dbStats" class="db-stats">—</div>
+    </div>
+  </aside>
+
+  <!-- ==================== Main ==================== -->
+  <main class="main">
+    <!-- ==================== View: People ==================== -->
+    <section id="view-people" class="view active">
+      <header class="page-head">
+        <h1>咨询师与来访者</h1>
+      </header>
+      <p class="page-sub">人员资料与声音样本统一管理。</p>
+
+      <div class="people-layout">
+        <section class="people-panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">咨询师</div>
+              <div class="panel-sub" id="counselorPanelSub">—</div>
+            </div>
+            <button class="icon-btn primary" id="btnAddCounselor" title="新增咨询师" aria-label="新增咨询师">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </button>
+          </div>
+          <div id="counselorGrid" class="counselor-grid"></div>
+        </section>
+        <section class="people-panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title" id="clientPanelTitle">来访者</div>
+              <div class="panel-sub" id="clientPanelSub">来访者列表</div>
+            </div>
+            <button class="icon-btn primary" id="btnAddClientForSelected" title="新增来访者" aria-label="新增来访者" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+            </button>
+          </div>
+          <div id="clientPanel" class="client-panel-list"></div>
+        </section>
+      </div>
+    </section>
+
+    <!-- ==================== View: Audio ==================== -->
+    <section id="view-audio" class="view">
+      <header class="page-head">
+        <h1 id="audioTitle">音频管理</h1>
+        <div class="page-actions">
+          <button class="btn btn-ghost" id="btnBackAudio">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            返回
+          </button>
+        </div>
+      </header>
+      <div id="audioContext" class="audio-context"></div>
+      <div id="audioList" class="audio-list"></div>
+    </section>
+
+    <!-- ==================== View: Compare ==================== -->
+    <section id="view-compare" class="view">
+      <header class="page-head">
+        <h1>声音分析</h1>
+      </header>
+      <p class="page-sub">单人分析查看一段声音的特征，双人分析比较咨询师与来访者的声音相似度。</p>
+
+      <div class="analysis-tabs" role="tablist">
+        <button class="analysis-tab" id="tabSingleAnalysis" data-analysis-mode="single" type="button">单人分析</button>
+        <button class="analysis-tab active" id="tabPairAnalysis" data-analysis-mode="pair" type="button">双人分析</button>
+      </div>
+
+      <div id="singleAnalysisPanel" class="analysis-panel hidden">
+        <div class="compare-setup single-setup">
+          <div class="field">
+            <label>人员类型</label>
+            <select id="singlePersonType">
+              <option value="counselor">咨询师</option>
+              <option value="client">来访者</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>选择人员</label>
+            <select id="singlePerson"><option value="">— 选择 —</option></select>
+          </div>
+          <div class="field">
+            <label>选择音频</label>
+            <select id="singleAudio"><option value="">— 选择 —</option></select>
+          </div>
+          <div class="compare-actions">
+            <button class="btn" id="btnSingleReport" type="button" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              查看报告
+            </button>
+            <button class="btn btn-primary" id="btnRunSingleAnalysis" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              开始分析
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="pairAnalysisPanel" class="analysis-panel">
+        <div class="compare-setup">
+          <div class="compare-col counselor-side">
+            <div class="compare-col-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/></svg>
+              咨询师
+            </div>
+            <div class="field">
+              <label>选择咨询师</label>
+              <select id="cmpCounselor"><option value="">— 选择 —</option></select>
+            </div>
+            <div class="field">
+              <label>咨询师音频</label>
+              <select id="cmpCounselorAudio"><option value="">— 选择 —</option></select>
+            </div>
+          </div>
+          <div class="compare-col client-side">
+            <div class="compare-col-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/></svg>
+              来访者
+            </div>
+            <div class="field">
+              <label>选择来访者</label>
+              <select id="cmpClient"><option value="">— 选择 —</option></select>
+            </div>
+            <div class="field">
+              <label>来访者音频</label>
+              <select id="cmpClientAudio"><option value="">— 选择 —</option></select>
+            </div>
+          </div>
+          <div class="compare-actions">
+            <button class="btn" id="btnDownloadReport" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              查看报告
+            </button>
+            <button class="btn btn-primary" id="btnRunCompare">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <polygon points="5 3 19 12 5 21 5 3"/>
+              </svg>
+              开始分析
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="compareResult" class="compare-result"></div>
+    </section>
+
+    <!-- ==================== View: Reports ==================== -->
+    <section id="view-reports" class="view">
+      <header class="page-head">
+        <h1>报告管理</h1>
+      </header>
+      <p class="page-sub">已生成的 HTML 报告，按单人报告和双人报告分区管理。</p>
+      <div class="report-sections">
+        <section class="report-section">
+          <div class="report-section-head">
+            <div>
+              <h2>单人报告</h2>
+              <p>单个咨询师或来访者的声音资料报告。</p>
+            </div>
+          </div>
+          <div id="singleReportList" class="report-list"></div>
+        </section>
+        <section class="report-section">
+          <div class="report-section-head">
+            <div>
+              <h2>双人报告</h2>
+              <p>咨询师 vs 来访者的声音对比报告。</p>
+            </div>
+          </div>
+          <div id="pairReportList" class="report-list"></div>
+        </section>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ==================== Modal ==================== -->
+<div id="modalMask" class="modal-mask hidden">
+  <div class="modal">
+    <div class="modal-head">
+      <span id="modalTitle">标题</span>
+      <button class="modal-close" id="modalClose" aria-label="关闭">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<!-- Load original app.js first, then mock adapter overrides it -->
+<script src="app.js?v=20260722-single-report-metrics19"></script>
+<script src="mock-adapter.js?v=1"></script>
+</body>
+</html>
