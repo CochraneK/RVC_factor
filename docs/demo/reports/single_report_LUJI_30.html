@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LUJI 单人声音报告</title>
+<style>
+body { margin:0; font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif; background:#fff8f0; color:#35281c; }
+main { max-width:920px; margin:0 auto; padding:32px 24px 56px; }
+h1 { margin:0 0 8px; font-size:30px; }
+.sub { color:#7a6755; margin-bottom:24px; }
+.summary,.plain-note { padding:18px 20px; border-radius:12px; background:#fff; border:1px solid #f0e2d0; margin-bottom:18px; line-height:1.8; }
+table { width:100%; border-collapse:collapse; background:#fff; border:1px solid #f0e2d0; border-radius:12px; overflow:hidden; margin:18px 0; }
+th,td { padding:10px 12px; border-bottom:1px solid #f0e2d0; text-align:left; }
+th { width:38%; color:#7a6755; background:#fff6ee; }
+h2 { margin-top:26px; font-size:20px; }
+li { margin:8px 0; line-height:1.8; }
+figure { background:#fff; border:1px solid #f0e2d0; border-radius:12px; padding:12px; margin:18px 0; }
+img { max-width:100%; display:block; margin:auto; }
+figcaption { color:#7a6755; font-size:13px; margin-top:10px; line-height:1.7; }
+figcaption b { display:block; color:#35281c; font-size:15px; margin-bottom:4px; }
+figcaption span { display:block; }
+</style>
+</head>
+<body>
+<main>
+<h1>LUJI</h1>
+<div class="sub">单人声音 HTML 报告</div>
+<section class="summary">这段声音的主要音高为 100.7 Hz，录音时长为 2.1 秒，频谱质心为 2058 Hz。这些指标用于了解单段声音的高低、明亮度和录音质量，不用于判断两个人是否相像。</section>
+<table><tr><th>音频名称</th><td>LUJI_M_Raw_01</td></tr>
+<tr><th>基频 F0</th><td>100.7 Hz</td></tr>
+<tr><th>常用音高范围</th><td>96.6-104.3 Hz</td></tr>
+<tr><th>声线倾向</th><td>男声倾向 0.00</td></tr>
+<tr><th>时长</th><td>2.1 秒</td></tr>
+<tr><th>频谱质心</th><td>2058 Hz</td></tr>
+<tr><th>频谱带宽</th><td>3579 Hz</td></tr>
+<tr><th>频谱滚降点</th><td>4906 Hz</td></tr>
+<tr><th>F1 平均值</th><td>1152 Hz</td></tr>
+<tr><th>F2 平均值</th><td>2398 Hz</td></tr>
+<tr><th>F3 平均值</th><td>3552 Hz</td></tr>
+<tr><th>声音纹理变化</th><td>8.77</td></tr>
+<tr><th>RMS</th><td>0.009</td></tr>
+<tr><th>ZCR</th><td>0.010</td></tr></table>
+<section class="plain-note">
+<h2>怎样理解这些数字</h2>
+<ul>
+<li><b>基频 F0</b>：可以理解为声音的主要高低。</li>
+<li><b>声线倾向</b>：根据音高和声学特征给出的粗略倾向，不等同于真实性别。</li>
+<li><b>频谱质心</b>：数值越高，声音通常越亮；数值越低，声音通常越厚。</li>
+<li><b>RMS</b>：平均音量强度，过低可能说明录音偏小。</li>
+<li><b>ZCR</b>：声音里细碎变化的多少，噪声较多时可能偏高。</li>
+</ul>
+</section>
+<figure><img src="../picture/LUJI_single_30_latest/single_overview.png" alt="单人声音总览"><figcaption><b>单人声音总览</b><span>这张图把音量起伏、频谱图和常用音高放在一起。它可以帮助你先整体看这段声音是否清晰、音量是否稳定、音高集中在哪里。</span></figcaption></figure>
+<figure><img src="../picture/LUJI_single_30_latest/single_f0_contour.png" alt="音高走势"><figcaption><b>音高走势</b><span>这张图看声音的高低怎样随时间变化。线条平稳说明音高变化小，起伏多说明说话时高低变化更明显。</span></figcaption></figure>
+<figure><img src="../picture/LUJI_single_30_latest/single_formants.png" alt="口腔共鸣特征"><figcaption><b>口腔共鸣特征</b><span>共振峰反映声音经过口腔和鼻腔后的共鸣位置。它帮助理解这段声音的音色结构，而不是判断好坏。</span></figcaption></figure>
+<figure><img src="../picture/LUJI_single_30_latest/single_avg_spectrum.png" alt="平均频谱"><figcaption><b>平均频谱</b><span>这张图看声音整体偏亮还是偏厚。高频更多通常听起来更亮，低频更多通常听起来更厚。</span></figcaption></figure>
+<figure><img src="../picture/LUJI_single_30_latest/single_mfcc.png" alt="声音纹理"><figcaption><b>声音纹理</b><span>可以把 MFCC 理解成声音细节的纹理图，用来观察这段声音内部结构是否稳定。</span></figcaption></figure>
+</main>
+</body>
+</html>

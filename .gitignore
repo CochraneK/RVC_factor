@@ -18,6 +18,11 @@ backups/
 report/
 picture/
 
+# But allow demo assets inside docs/
+!docs/demo/picture/
+!docs/demo/reports/
+!docs/demo/avatars/
+
 # Keep the example audio samples (samples/audio/*.wav) — those are demo-only
 
 # OS / editor

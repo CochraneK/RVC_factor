@@ -48,9 +48,9 @@ const MOCK_ALL_AUDIOS = [
 ];
 
 const MOCK_REPORTS = [
-  { id: 1, a_audio_id: 1001, b_audio_id: 1101, counselor_id: 1, client_id: 101, audio_role: "", report_type: "pair", title: "王医生 vs 张三 — 声音对比分析", html_filename: "report_1_1001_1101.html", created_at: "2026-07-19T10:00:00" },
-  { id: 2, a_audio_id: 1002, b_audio_id: 1101, counselor_id: 1, client_id: 101, audio_role: "converted", report_type: "pair", title: "王医生(变音) vs 张三 — 声音对比分析", html_filename: "report_2_1002_1101.html", created_at: "2026-07-20T09:30:00" },
-  { id: 3, a_audio_id: 1001, b_audio_id: 1001, counselor_id: 1, client_id: null, audio_role: "", report_type: "single", title: "王医生 — 单人声音分析报告", html_filename: "report_single_1001.html", created_at: "2026-07-20T11:00:00" },
+  { id: 8, a_audio_id: 28, b_audio_id: 28, counselor_id: 16, client_id: null, audio_role: "original", report_type: "single", title: "王老师 单人声音报告", html_filename: "single_report_王老师_28.html", created_at: "2026-07-22T09:04:05" },
+  { id: 7, a_audio_id: 30, b_audio_id: 30, counselor_id: null, client_id: 13, audio_role: "original", report_type: "single", title: "LUJI 单人声音报告", html_filename: "single_report_LUJI_30.html", created_at: "2026-07-22T09:01:10" },
+  { id: 6, a_audio_id: 28, b_audio_id: 30, counselor_id: 16, client_id: 13, audio_role: "original", report_type: "pair", title: "王老师 vs LUJI（原音）", html_filename: "report_王老师_LUJI_20260722_162735.html", created_at: "2026-07-22T08:27:41" },
 ];
 
 // ---------- Mock API ----------
@@ -187,28 +187,46 @@ window.api = async function api(path, opts = {}) {
 
   // GET /api/reports
   if (mReports && (!opts.method || opts.method === "GET")) {
-    return [...MOCK_REPORTS];
+    const urlParams = new URLSearchParams(path.split("?")[1] || "");
+    const reportType = urlParams.get("report_type");
+    let reports = MOCK_REPORTS.map(r => ({ ...r, url: `./reports/${r.html_filename}` }));
+    if (reportType) {
+      reports = reports.filter(r => r.report_type === reportType);
+    }
+    return reports;
+  }
+
+  // DELETE /api/reports/:id
+  const mDeleteReport = path.match(/^\/api\/reports\/(\d+)$/);
+  if (mDeleteReport && opts.method === "DELETE") {
+    toast("【演示模式】不支持删除报告", "bad");
+    throw new Error("演示模式：数据为只读");
   }
 
   // GET /api/report_html_single/:id
   if (mReportHtmlSingle && (!opts.method || opts.method === "GET")) {
-    return `<html><body><h1>单人报告</h1><p>这是演示模式的报告内容。</p></body></html>`;
+    const aid = parseInt(mReportHtmlSingle[1]);
+    const report = MOCK_REPORTS.find(r => r.report_type === "single" && r.a_audio_id === aid);
+    if (report) {
+      return { url: `./reports/${report.html_filename}` };
+    }
+    throw new Error("未找到报告");
   }
 
   // POST /api/compare
   if (mCompare && opts.method === "POST") {
-    // Return a mock comparison result
+    // Return a mock comparison result based on real data
     return {
-      verdict: "NO",
-      confidence: "Medium",
-      reason: "Speaker embedding significantly different. pitch differs by 4.2 semitones (large). formant F2 differs by 85 Hz (noticeable). spectral centroid moderately different. Multiple acoustic cues diverge, indicating different speakers.",
+      verdict: "Uncertain",
+      confidence: "Low",
+      reason: "Speaker embedding strongly similar (timbre). pitch differs by 5.8 semitones (large). formant F2 differs by 403 Hz (strong difference). spectral centroid moderately different. Evidence is mixed; further manual inspection recommended.",
       metrics: {
-        pitch_a_hz: 185.5, pitch_b_hz: 155.2, pitch_diff_st: 4.2,
-        f2_a_hz: 1450, f2_b_hz: 1535, f2_diff_hz: 85,
-        centroid_a: 1850.3, centroid_b: 2100.3, centroid_diff: 250,
-        rms_a: 0.078, rms_b: 0.055,
-        zcr_a: 0.045, zcr_b: 0.065,
-        duration_a: 45.2, duration_b: 120.5,
+        pitch_a_hz: 140.47, pitch_b_hz: 100.75, pitch_diff_st: 5.8,
+        f2_a_hz: 1450, f2_b_hz: 1853, f2_diff_hz: 403,
+        centroid_a: 2434.6, centroid_b: 2057.9, centroid_diff: 376.7,
+        rms_a: 0.0418, rms_b: 0.0087,
+        zcr_a: 0.0312, zcr_b: 0.0102,
+        duration_a: 6.74, duration_b: 2.13,
       }
     };
   }
@@ -216,13 +234,25 @@ window.api = async function api(path, opts = {}) {
   // GET /api/report/:a/:b (for viewing pair report HTML)
   const mReportPair = path.match(/^\/api\/report\/(\d+)\/(\d+)$/);
   if (mReportPair && (!opts.method || opts.method === "GET")) {
-    return `<html><body><h1>双人对比报告</h1><p>这是演示模式的报告内容。</p></body></html>`;
+    const aId = parseInt(mReportPair[1]);
+    const bId = parseInt(mReportPair[2]);
+    const report = MOCK_REPORTS.find(r => r.report_type === "pair" && r.a_audio_id === aId && r.b_audio_id === bId);
+    if (report) {
+      return { url: `./reports/${report.html_filename}` };
+    }
+    throw new Error("未找到报告");
   }
 
   // GET /api/report_html/:a/:b
   const mReportHtmlPair = path.match(/^\/api\/report_html\/(\d+)\/(\d+)$/);
   if (mReportHtmlPair && (!opts.method || opts.method === "GET")) {
-    return `<html><body><h1>双人对比报告</h1><p>这是演示模式的报告内容。</p></body></html>`;
+    const aId = parseInt(mReportHtmlPair[1]);
+    const bId = parseInt(mReportHtmlPair[2]);
+    const report = MOCK_REPORTS.find(r => r.report_type === "pair" && r.a_audio_id === aId && r.b_audio_id === bId);
+    if (report) {
+      return { url: `./reports/${report.html_filename}` };
+    }
+    throw new Error("未找到报告");
   }
 
   // Fallback: try to return sensible defaults for unhandled GETs

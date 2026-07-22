@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>王老师 vs LUJI（原音） 声音相似度报告</title>
+<style>
+body { margin:0; font-family: "Microsoft YaHei", "PingFang SC", "Segoe UI", sans-serif; background:#fff8f0; color:#35281c; }
+main { max-width: 1040px; margin: 0 auto; padding: 32px 24px 56px; }
+h1 { margin:0 0 8px; font-size: 30px; }
+.sub { color:#7a6755; margin-bottom:24px; }
+.verdict,.plain-note { padding:18px 20px; border-radius:12px; background:#fff; border:1px solid #f0e2d0; margin-bottom:18px; }
+.verdict b { font-size:22px; color:#e26d8e; }
+table { width:100%; border-collapse:collapse; background:#fff; border:1px solid #f0e2d0; border-radius:12px; overflow:hidden; margin:18px 0; }
+th,td { padding:10px 12px; border-bottom:1px solid #f0e2d0; text-align:left; }
+th { width:38%; color:#7a6755; background:#fff6ee; }
+figure { background:#fff; border:1px solid #f0e2d0; border-radius:12px; padding:12px; margin:18px 0; }
+img { max-width:100%; display:block; margin:auto; }
+figcaption { color:#7a6755; font-size:13px; margin-top:10px; line-height:1.7; }
+figcaption b { display:block; color:#35281c; font-size:15px; margin-bottom:4px; }
+figcaption span { display:block; }
+</style>
+</head>
+<body>
+<main>
+<h1>王老师 vs LUJI</h1>
+<div class="sub">声音相似度 HTML 报告</div>
+<section class="verdict"><b>需要人工复核</b> <span>置信度：低</span><p>系统判断：需要人工复核，把握程度为低。综合分为 0.666，音色相似度为 0.999。两段声音的音高相差约 5.8 个半音，共鸣位置差约 403 Hz。可以把这些数字理解为辅助线索：分数越高、差异越小，两段声音听起来通常越接近；但录音环境、情绪和说话内容也会影响结果。</p></section>
+<section class="plain-note">这份报告不是医学诊断，也不是最终身份结论。它只是把两段声音的几个关键特征放在一起，帮助咨询师和来访者更直观地理解“哪里像、哪里不像”。</section>
+<table><tr><th>咨询师音高</th><td>140.47 Hz</td></tr>
+<tr><th>来访者音高</th><td>100.75 Hz</td></tr>
+<tr><th>音高差</th><td>-5.8 半音</td></tr>
+<tr><th>音色相似度</th><td>0.999</td></tr>
+<tr><th>音高相似度</th><td>0.520</td></tr>
+<tr><th>共鸣差异 F2</th><td>403 Hz</td></tr>
+<tr><th>共鸣差异比例</th><td>1.00</td></tr>
+<tr><th>明亮度差异</th><td>377 Hz</td></tr>
+<tr><th>声音纹理相似度</th><td>0.999</td></tr>
+<tr><th>综合分</th><td>0.666</td></tr>
+<tr><th>结论</th><td>需要人工复核（置信度：低）</td></tr></table>
+<figure><img src="../picture/王老师_LUJI_latest/overview.png" alt="总览图"><figcaption><b>总览图</b><span>这张图把两段声音放在一起看：上面是音量起伏，中间是声音里不同频率的强弱，下面是常用音高的分布。简单说，它帮我们同时观察“说话节奏、声音高低、声音颜色”是否接近。</span></figcaption></figure>
+<figure><img src="../picture/王老师_LUJI_latest/f0_contours.png" alt="音高走势"><figcaption><b>音高走势</b><span>这张图看声音的高低怎样随时间变化。线条越像，说明两个人说话时升高、降低的习惯越接近；线条差很多，就需要谨慎判断。</span></figcaption></figure>
+<figure><img src="../picture/王老师_LUJI_latest/formants.png" alt="口腔共鸣特征"><figcaption><b>口腔共鸣特征</b><span>这里反映的是声音经过口腔、鼻腔后形成的共鸣位置。它不像音量那样容易刻意改变，所以常用来辅助判断声音是否来自同一个人。</span></figcaption></figure>
+<figure><img src="../picture/王老师_LUJI_latest/avg_spectrum.png" alt="声音明亮度"><figcaption><b>声音明亮度</b><span>这张图看整体声音偏亮还是偏闷。高频更多通常听起来更亮，低频更多通常听起来更厚；差距过大时，可能是不同人或录音环境不同。</span></figcaption></figure>
+<figure><img src="../picture/王老师_LUJI_latest/mfcc.png" alt="声音纹理"><figcaption><b>声音纹理</b><span>可以把它理解成声音的“纹理照片”。颜色分布越接近，说明整体音色结构越像；差异明显时，代表两段声音的细节特征不同。</span></figcaption></figure>
+</main>
+</body>
+</html>
