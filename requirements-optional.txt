@@ -1,0 +1,10 @@
+# Optional speaker embedding backend.
+#
+# Install this after the base requirements if you want Resemblyzer-based
+# speaker embeddings. Without it, the app still runs and falls back to MFCC
+# similarity in core.py.
+resemblyzer>=0.1.4
+
+# Optional avatar face detection. Without it, the app still works and uses
+# browser/manual crop plus a center fallback.
+opencv-python-headless>=4.10

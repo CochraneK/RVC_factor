@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.agents/
+
+# Local runtime data (do not commit user uploads, generated reports, or DB)
+output/
+
+# Legacy root-level runtime data, kept ignored if an old script recreates it.
+rvc.db
+uploads/
+logs/
+backups/
+report/
+picture/
+
+# Keep the example audio samples (samples/audio/*.wav) — those are demo-only
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
