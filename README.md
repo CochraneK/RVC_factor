@@ -22,18 +22,16 @@
 
 ![双人对比报告](docs/screenshots/02-pair-report.png)
 
-单人声音特征报告，展示基频、频谱、声音纹理等详细声学特征：
-
-![单人声音报告](docs/screenshots/03-single-report.png)
-
 ### 音频谱图
-报告内嵌的声学分析图表，展示音高走势、共振峰、频谱、MFCC 声音纹理等：
+Python 声学分析生成的图表（以双人对比为例）：
 
-**单人报告图表**
-![单人报告图表](docs/screenshots/05-single-report-charts.png)
+| 总览图 | 音高走势 |
+|---|---|
+| ![总览](docs/screenshots/chart-overview.png) | ![音高](docs/screenshots/chart-f0.png) |
 
-**双人对比图表**
-![双人报告图表](docs/screenshots/06-pair-report-charts.png)
+| 共振峰特征 |
+|---|
+| ![共振峰](docs/screenshots/chart-formants.png) |
 
 ## 快速开始
 
