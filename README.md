@@ -26,6 +26,15 @@
 
 ![单人声音报告](docs/screenshots/03-single-report.png)
 
+### 音频谱图
+报告内嵌的声学分析图表，展示音高走势、共振峰、频谱、MFCC 声音纹理等：
+
+**单人报告图表**
+![单人报告图表](docs/screenshots/05-single-report-charts.png)
+
+**双人对比图表**
+![双人报告图表](docs/screenshots/06-pair-report-charts.png)
+
 ## 快速开始
 
 ```bash
